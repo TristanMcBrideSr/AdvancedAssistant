@@ -76,7 +76,7 @@ class HoloAssistant:
             self.memories = self.memories[-maxTurns*2:]
 
     def HoloCompletion(self, user: str) -> str:
-        skills = self.skillGraph.getAgentCapabilities()
+        skills = self.skillGraph.getAgentSkills()
         actions = self.skillGraph.getAgentActions()
 
         system = f"The current user is {USER_NAME}."
