@@ -102,4 +102,4 @@ class HoloVoice:
         return msg.strip() if msg else None
 
     def _printMessage(self, type, text):
-        self.holoEcho.printMessage(type, text, self.assistantName)
+        self.holoEcho.streamMessage(type, text, name=self.assistantName)

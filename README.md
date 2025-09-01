@@ -103,7 +103,7 @@ Tell me about these C:\images\photo.png, C:\docs\notes.txt
 
 The assistant integrates with **SkillGraph**:
 
-* `getAgentCapabilities()` → available skills
+* `getAgentSkills()` → available skills
 * `getAgentActions()` → executable actions
 
 Both are optional and passed into `HoloCompletion`.
