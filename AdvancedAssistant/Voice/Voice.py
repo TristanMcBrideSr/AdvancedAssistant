@@ -37,8 +37,13 @@ class HoloVoice:
         self.holoEcho.setProperty("rate", 180)  # Speed of speech
         self.holoEcho.setProperty("pitch", 150) # Pitch of speech
         self.holoEcho.setProperty("volume", 1.0) # Volume level (0.0 to 1.0)
+        self.holoEcho.setProperty("synthesisMode", 'advanced') # 'standard' or 'advanced'
+        # Use listVoices() method to see available voices for standard voices
         self.holoEcho.setProperty("standardMaleVoice", 0)
         self.holoEcho.setProperty("standardFemaleVoice", 1)
+        # Advanced Voices may take some time to load depending on your system due to downloading the model once downloaded it will be cached for future use
+        self.holoEcho.setProperty("advancedMaleVoice", 11)
+        self.holoEcho.setProperty("advancedFemaleVoice", 14)
         self.holoEcho.setProperty("mode", self.defaultMode)
         self.holoEcho.setProperty("commands", COMMANDS)
 
@@ -94,7 +99,7 @@ class HoloVoice:
         return msg
 
     def _ambientInput(self) -> str:
-        return self.holoEcho.handleAmbientInput()
+        return self.holoEcho.ambientInput()
 
     def _keyboardInput(self) -> str:
         msg = self.holoEcho.keyboardInput('Enter your input:\n')
@@ -103,3 +108,11 @@ class HoloVoice:
 
     def _printMessage(self, type, text):
         self.holoEcho.streamMessage(type, text, name=self.assistantName)
+
+    def listVoices(self):
+        """
+        List available voices for pyttsx4
+        you can also install additional voices on your system
+        and then list them to get their number IDs to use
+        """
+        self.holoEcho.listVoices()
