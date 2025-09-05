@@ -49,6 +49,12 @@ class Config:
         self.skillGraph = SkillGraph()
         self.provider   = os.getenv("PROVIDER", "openai").lower()
         self.providers = {
+            # You can mix and match models from different providers as long as you have the API keys set
+            "mixed": {
+                "response": os.getenv("OPENAI_RESPONSE_MODEL", "gpt-4.1"),
+                "vision": os.getenv("GEMINI_VISION_MODEL", "gemini-2.5-flash"),
+                "generation": os.getenv("XAI_IMAGE_MODEL", "grok-2-image"),
+            },
             "openai": {
                 "response": os.getenv("OPENAI_RESPONSE_MODEL", "gpt-4.1"),
                 "vision": os.getenv("OPENAI_VISION_MODEL", "gpt-4.1"),
