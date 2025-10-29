@@ -7,7 +7,7 @@ from datetime import datetime
 
 from HoloAI import HoloAI
 from Voice.Voice import HoloVoice
-from SkillGraph.SkillGraph import SkillGraph
+from Skills.Skills import Skills
 
 load_dotenv()
 
@@ -44,10 +44,10 @@ MAX_TURNS        = int(os.getenv("MAX_TURNS", DEFAULTS["MAX_TURNS"]))
 
 class Config:
     def __init__(self):
-        self.client     = HoloAI()
-        self.holoVoice  = HoloVoice(USER_NAME, ASSISTANT_NAME, ASSISTANT_GENDER, DEFAULT_MODE)
-        self.skillGraph = SkillGraph()
-        self.provider   = os.getenv("PROVIDER", "openai").lower()
+        self.client    = HoloAI()
+        self.holoVoice = HoloVoice(USER_NAME, ASSISTANT_NAME, ASSISTANT_GENDER, DEFAULT_MODE)
+        self.skills    = Skills()
+        self.provider  = os.getenv("PROVIDER", "openai").lower()
         self.providers = {
             # You can mix and match models from different providers as long as you have the API keys set
             "mixed": {
@@ -85,8 +85,8 @@ class Config:
         self.startMsg = False
 
     def HoloCompletion(self, user: str) -> str:
-        skills  = self.skillGraph.getAgentSkills()
-        actions = self.skillGraph.getAgentActions()
+        skills  = self.skills.getAgentSkills()
+        actions = self.skills.getAgentActions()
         system, instructions = self.systemInstructions()
         msgs = self.client.formatConversation(self.memories, user)
 
